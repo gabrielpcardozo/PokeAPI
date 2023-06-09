@@ -1,6 +1,7 @@
+"""
+Aqui fica os primeiros testes e linhas do primeiro arquivo antes do MVC.
+"""
 import requests
-import pprint
-
 
 # Aqui temos todos os POKEMONS disponivies em nosso game.
 def list_all_names():
