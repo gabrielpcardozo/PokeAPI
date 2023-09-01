@@ -1,5 +1,5 @@
-#Vou chamar todas os arquivos e funções para ca, depois que estiver todo o programa pronto.
-import controller_pokemon
+"""
+Aqui como o meu main vou chamar oq for necessario para fazer o meu programa funcionar.
+"""
+import services
 
-
-controller_pokemon.get_weight()
