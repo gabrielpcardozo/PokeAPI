@@ -10,14 +10,21 @@ A ideia aqui é ter duas Classes
 """
 import requests
 import pprint
+
+#A ideia dessa classe é Termos toda a nossa comuinição com o PokeAPI é realizarmos todos os gets com o site, para utilizamos.
 class PokemonAPI:
+    def __init__(self):
+        self.abilities_effect = {}
+
     def get_main_pokemon(self, pokemon_name):
         url = f'https://pokeapi.co/api/v2/pokemon/{pokemon_name}'
+        #url = f'http://127.0.0.1:5000/pokemon//{pokemon_name}' #Testes utilizando o flask para tentar não tomar alguns bloqueios. 
         response = requests.get(url)
         if response.status_code == 200:
-            return response.json()
+            data = response.json()
+            return data
         else:
-            return None
+            print(f"Erro na solicitação: {response.status_code}")
 
     def get_infos_battle(self, battle_infos_hp):
         collect_battle_infos = PokemonAPI().get_main_pokemon(battle_infos_hp)
@@ -45,53 +52,56 @@ class PokemonAPI:
                 evolution_chain_response = requests.get(evolution_chain_url)
                 evolution_chain_data = evolution_chain_response.json()
                 return evolution_chain_data
-            
+    
+    def get_abilities(self, pokemon_name):
+        get_pokemon = PokemonAPI().get_main_pokemon(pokemon_name)
+        get_abilities = get_pokemon["abilities"]
+        for a in get_abilities:
+            ability_name = a['ability']['name']
+            effect_name = a['ability']['url']
 
-class Pokemon:
-    def name(self, poke_name):
-        show_name = PokemonAPI().get_pokemon(poke_name)
+            u = requests.get(effect_name).json()
+            entry = u["effect_entries"]
+
+            for i in entry:
+                if i["language"]["name"] == "en":
+                    ability_effect = i["short_effect"]
+                    break
+            else:
+                ability_effect = "No English description available"
+
+            self.abilities_effect[ability_name] = ability_effect
+
+        return self.abilities_effect
+
+#A ideia dessa classe é deixar os saídas mais apropriadas para serem mostradas para os usuários ou até mesmo utilizadas.
+class ShowInfos:
+    def show_name(self, name):
+        show_name = PokemonAPI().get_main_pokemon(name)
         return show_name['name']
 
-    def id(self, id):
-        show_id = PokemonAPI().get_pokemon(id)
+    def show_id(self, id):
+        show_id = PokemonAPI().get_main_pokemon(id)
         return show_id['id']
 
-    def weight(self, weight):
-        show_weight = PokemonAPI().get_pokemon(weight)
+    def show_weight(self, weight):
+        show_weight = PokemonAPI().get_main_pokemon(weight)
         return show_weight['weight']
 
-    def abilities(self, abilities):
-        """show_abilities = PokemonAPI().get_main_pokemon(abilities)
-        abilities_effects = {}
+    def show_abilities(self, abilities):
+        get_abilities = PokemonAPI().get_abilities(abilities)
+        details = []
+        for a, e in get_abilities.items():
+            details.append(f"Habilidade: {a} -> Effect: {e}")
         
-        for ability_data in show_abilities["abilities"]:
-            ability_name = ability_data['ability']['name']
-            ability_url = ability_data['ability']['url']
-            ability_response = requests.get(ability_url).json()
-            effect_entries = ability_response["effect_entries"]
-            
-            if effect_entries:
-                short_effect = effect_entries[0]["short_effect"]
-                abilities_effects[ability_name] = short_effect
-        
-        return abilities_effects"""
-        
-        """abilities =  show_abilities["abilities"]
-        effects_data = show_abilities["abilities"]
-        effects_data = effects_data['ability']['url']
-        effects = effects_data.json()
-        abilit_effec = {abilities['ability']['name'] : effects["effect_entries"]["short_effect"] for attack in effects_data}
-        return  abilit_effec
-        """
-        #abilitAbilities: {[a['ability']['name'] for a in show_abilities['abilities']]}
-        
-        #return f"Abilities: {[a['ability']['name'] for a in show_abilities['abilities']]}"#Listcomprehensions
+        return "\n".join(details)
+    
 
-    def types(self,types):
-        show_type = PokemonAPI().get_pokemon(types)
+    def show_type(self,types):
+        show_type = PokemonAPI().get_main_pokemon(types)
         return f"Type(s): {[t['type']['name'] for t in show_type['types']]}"#Listcomprehensions
   
-    def evolutions(self, pokemon_name):    
+    def show_evolutions(self, pokemon_name):    
         collect_evolves = PokemonAPI().get_infos_envolves(pokemon_name)
                 
     
@@ -114,27 +124,27 @@ class Pokemon:
     HP | ATTACK | DEFENSE | SPECIAL-ATTACK | SPECIAL-DEFENSE | SPEED
     Essas são as informações encontradas no PokeAPI.
     """
-    def HP(self, battle_infos_hp):
+    def show_HP(self, battle_infos_hp):
         hp = PokemonAPI().get_infos_battle(battle_infos_hp)
         return f" HP:{hp['hp']}" 
 
-    def attack(self, battle_infos_attack):
+    def show_attack(self, battle_infos_attack):
         attack = PokemonAPI().get_infos_battle(battle_infos_attack)
         return f" Attack:{attack['attack']}" 
     
-    def defense(self, battle_infos_defense):
+    def show_defense(self, battle_infos_defense):
         attack = PokemonAPI().get_infos_battle(battle_infos_defense)
         return f" Defense:{attack['defense']}"
     
-    def special_attack(self, battle_infos_special_attack):
+    def show_special_attack(self, battle_infos_special_attack):
         attack = PokemonAPI().get_infos_battle(battle_infos_special_attack)
         return f" Special Attack:{attack['special-attack']}"
 
-    def special_defense(self, battle_infos_special_defense):
+    def show_special_defense(self, battle_infos_special_defense):
         attack = PokemonAPI().get_infos_battle(battle_infos_special_defense)
         return f" Special Defense:{attack['special-defense']}"
         
-    def speed(self, battle_infos_speed):
+    def show_speed(self, battle_infos_speed):
         attack = PokemonAPI().get_infos_battle(battle_infos_speed)
         return f" Speed:{attack['speed']}"
     #Aqui acaba as informações de batalha.
@@ -142,3 +152,14 @@ class Pokemon:
     def show_picture(self, picture):
         show_picture = PokemonAPI().get_main_pokemon(picture)
         return show_picture['sprites']['front_default']
+
+
+list_pokedex = []
+
+class Pokemon:
+    def __init__(self, pokemon_name):
+        self.name = ShowInfos().show_name(pokemon_name)
+
+    def add_poke(poke):
+        new_instance = Pokemon(poke)
+        list_pokedex.append(new_instance)

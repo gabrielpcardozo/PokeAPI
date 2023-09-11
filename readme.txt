@@ -11,7 +11,7 @@ Aqui quero fazer algumas coisas a mais:
 		peso
 		habilidades
 			nome das habilidades
-			Efeito <== ESTOU REVISANDO ESSA PARTE ==>
+			Efeito
 		Evoluções
 		Informações de combate
 			Vida
@@ -20,7 +20,24 @@ Aqui quero fazer algumas coisas a mais:
 			defesa
 			defesa pessoal
 			Velocidade
-		
+
+	Criar uma classe onde instancie um pokemon com as informações do site
+
+
+	Criar um sistema de Treinador
+		nome 
+		nickname
+		bag
+			itens
+			pokemballs
+				pokeballs - normal
+				masterballs
+			Pokemons
+	
+	Lidar com as instancias agora, estou tetando colocar as instancias dos pokemons,
+	dentro da mochilla(pokedex) do treinado para comecar a fazer o XP de cada um e 
+	colocar em prática as batalhas de cada treinador.
+	
 	Criar UM sistema de XP <-- ESTAMOS AQUI --> 
 		xp do treinador 
 		xp do Pokemon

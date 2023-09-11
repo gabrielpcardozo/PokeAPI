@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./App/Controllers",
+        "./App/Models"
+    ]
+}
