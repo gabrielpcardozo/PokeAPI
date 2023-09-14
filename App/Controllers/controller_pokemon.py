@@ -20,11 +20,13 @@ class PokemonAPI:
         url = f'https://pokeapi.co/api/v2/pokemon/{pokemon_name}'
         #url = f'http://127.0.0.1:5000/pokemon//{pokemon_name}' #Testes utilizando o flask para tentar não tomar alguns bloqueios. 
         response = requests.get(url)
-        if response.status_code == 200:
-            data = response.json()
-            return data
+        req = response.status_code
+        #return response
+        if req >= 200:
+            return response.json()
         else:
             print(f"Erro na solicitação: {response.status_code}")
+
 
     def get_infos_battle(self, battle_infos_hp):
         collect_battle_infos = PokemonAPI().get_main_pokemon(battle_infos_hp)
@@ -78,7 +80,10 @@ class PokemonAPI:
 class ShowInfos:
     def show_name(self, name):
         show_name = PokemonAPI().get_main_pokemon(name)
-        return show_name['name']
+        if show_name is not None:
+            return show_name['name']
+        else:
+            return None
 
     def show_id(self, id):
         show_id = PokemonAPI().get_main_pokemon(id)
@@ -163,3 +168,7 @@ class Pokemon:
     def add_poke(poke):
         new_instance = Pokemon(poke)
         list_pokedex.append(new_instance)
+
+
+#print(PokemonAPI().get_main_pokemon('pikachu'))
+#print(ShowInfos().show_name('pikachu'))
