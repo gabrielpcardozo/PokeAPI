@@ -77,23 +77,23 @@ class PokemonAPI:
         return self.abilities_effect
 
 #A ideia dessa classe é deixar os saídas mais apropriadas para serem mostradas para os usuários ou até mesmo utilizadas.
-class ShowInfos:
-    def show_name(self, name):
-        show_name = PokemonAPI().get_main_pokemon(name)
-        if show_name is not None:
-            return show_name['name']
+class CollectInfos:
+    def collect_name(self, name):
+        collect_name = PokemonAPI().get_main_pokemon(name)
+        if collect_name is not None:
+            return collect_name['name']
         else:
             return None
 
-    def show_id(self, id):
-        show_id = PokemonAPI().get_main_pokemon(id)
-        return show_id['id']
+    def collect_id(self, id):
+        collect_id = PokemonAPI().get_main_pokemon(id)
+        return collect_id['id']
 
-    def show_weight(self, weight):
-        show_weight = PokemonAPI().get_main_pokemon(weight)
-        return show_weight['weight']
+    def collect_weight(self, weight):
+        collect_weight = PokemonAPI().get_main_pokemon(weight)
+        return collect_weight['weight']
 
-    def show_abilities(self, abilities):
+    def collect_abilities(self, abilities):
         get_abilities = PokemonAPI().get_abilities(abilities)
         details = []
         for a, e in get_abilities.items():
@@ -102,11 +102,11 @@ class ShowInfos:
         return "\n".join(details)
     
 
-    def show_type(self,types):
-        show_type = PokemonAPI().get_main_pokemon(types)
-        return f"Type(s): {[t['type']['name'] for t in show_type['types']]}"#Listcomprehensions
+    def collect_type(self,types):
+        collect_type = PokemonAPI().get_main_pokemon(types)
+        return f"Type(s): {[t['type']['name'] for t in collect_type['types']]}"#Listcomprehensions
   
-    def show_evolutions(self, pokemon_name):    
+    def collect_evolutions(self, pokemon_name):    
         collect_evolves = PokemonAPI().get_infos_envolves(pokemon_name)
                 
     
@@ -129,41 +129,41 @@ class ShowInfos:
     HP | ATTACK | DEFENSE | SPECIAL-ATTACK | SPECIAL-DEFENSE | SPEED
     Essas são as informações encontradas no PokeAPI.
     """
-    def show_HP(self, battle_infos_hp):
+    def collect_HP(self, battle_infos_hp):
         hp = PokemonAPI().get_infos_battle(battle_infos_hp)
         return f" HP:{hp['hp']}" 
 
-    def show_attack(self, battle_infos_attack):
+    def collect_attack(self, battle_infos_attack):
         attack = PokemonAPI().get_infos_battle(battle_infos_attack)
         return f" Attack:{attack['attack']}" 
     
-    def show_defense(self, battle_infos_defense):
+    def collect_defense(self, battle_infos_defense):
         attack = PokemonAPI().get_infos_battle(battle_infos_defense)
         return f" Defense:{attack['defense']}"
     
-    def show_special_attack(self, battle_infos_special_attack):
+    def collect_special_attack(self, battle_infos_special_attack):
         attack = PokemonAPI().get_infos_battle(battle_infos_special_attack)
         return f" Special Attack:{attack['special-attack']}"
 
-    def show_special_defense(self, battle_infos_special_defense):
+    def collect_special_defense(self, battle_infos_special_defense):
         attack = PokemonAPI().get_infos_battle(battle_infos_special_defense)
         return f" Special Defense:{attack['special-defense']}"
         
-    def show_speed(self, battle_infos_speed):
+    def collect_speed(self, battle_infos_speed):
         attack = PokemonAPI().get_infos_battle(battle_infos_speed)
         return f" Speed:{attack['speed']}"
     #Aqui acaba as informações de batalha.
     
-    def show_picture(self, picture):
-        show_picture = PokemonAPI().get_main_pokemon(picture)
-        return show_picture['sprites']['front_default']
+    def collect_picture(self, picture):
+        collect_picture = PokemonAPI().get_main_pokemon(picture)
+        return collect_picture['sprites']['front_default']
 
 
 list_pokedex = []
 
 class Pokemon:
     def __init__(self, pokemon_name):
-        self.name = ShowInfos().show_name(pokemon_name)
+        self.name = collectInfos().collect_name(pokemon_name)
 
     def add_poke(poke):
         new_instance = Pokemon(poke)
@@ -171,4 +171,4 @@ class Pokemon:
 
 
 #print(PokemonAPI().get_main_pokemon('pikachu'))
-#print(ShowInfos().show_name('pikachu'))
+#print(collectInfos().collect_name('pikachu'))

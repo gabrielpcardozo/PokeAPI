@@ -6,7 +6,7 @@ import pprint
 import requests
 
 #variavel usada para testes. 
-poke_test = 'pikachu'
+poke_test = 'snorlax'
 #pprint -> Para retornos mais formatados.
 pp = pprint.PrettyPrinter()
 ######################
@@ -22,50 +22,47 @@ import controller_pokemon
 import services
 ######################
 #Testes para saber se os módulos estão funcionando.
-#print(controller_pokemon.ShowInfos().show_attack('pikachu'))
-#print(controller_pokemon.ShowInfos().show_id('pikachu'))
+#print(controller_pokemon.CollectInfos().collect_attack('pikachu'))
+#print(controller_pokemon.CollectInfos().collect_id('pikachu'))
 
 #trainer = services.Treiner.create_trainer("samuel","samuca")
 
-############################################################
-""" 
-Aqui começam os testes!
-    Testes do módulo Controller_pokemon. 
+###################################################################
+##Aqui começam os testes!                                       ###
+##Testes do módulo Controller_pokemon.                          ###
+##Testes poara saber se a classe CollectInfos: está funcionando.### 
+###################################################################
 """
-
-############################################################
-
-"""#Testes de visualizações. 
-#Show name
-print(controller_pokemon.ShowInfos().show_name(poke_test))
-#Show_id
-print(controller_pokemon.ShowInfos().show_id(poke_test))
+#collect name
+print(controller_pokemon.CollectInfos().collect_name(poke_test))
+#collect_id
+print(controller_pokemon.CollectInfos().collect_id(poke_test))
 #get_weight
-print(controller_pokemon.ShowInfos().show_weight(poke_test))
+print(controller_pokemon.CollectInfos().collect_weight(poke_test))
 #Type
-print(controller_pokemon.ShowInfos().show_type(poke_test))
+print(controller_pokemon.CollectInfos().collect_type(poke_test))
 #Evolves
-print(controller_pokemon.ShowInfos().show_evolutions(poke_test))
+print(controller_pokemon.CollectInfos().collect_evolutions(poke_test))
 #abilities 
-print(controller_pokemon.ShowInfos().show_abilities(poke_test))
+print(controller_pokemon.CollectInfos().collect_abilities(poke_test))
 #Picture
-print(controller_pokemon.ShowInfos().show_picture(poke_test))
+print(controller_pokemon.CollectInfos().collect_picture(poke_test))
 
 #Infos for battles
     #HP
-print(controller_pokemon.ShowInfos().show_HP(poke_test))
+print(controller_pokemon.CollectInfos().collect_HP(poke_test))
     #Attack
-print(controller_pokemon.ShowInfos().show_attack(poke_test))
+print(controller_pokemon.CollectInfos().collect_attack(poke_test))
     #Defense
-print(controller_pokemon.ShowInfos().show_defense(poke_test))
+print(controller_pokemon.CollectInfos().collect_defense(poke_test))
     #Special_Attack
-print(controller_pokemon.ShowInfos().show_special_attack(poke_test))
+print(controller_pokemon.CollectInfos().collect_special_attack(poke_test))
     #Special_Defense
-print(controller_pokemon.ShowInfos().show_special_defense(poke_test))
+print(controller_pokemon.CollectInfos().collect_special_defense(poke_test))
     #Speed
-print(controller_pokemon.ShowInfos().show_speed(poke_test))
-"""
+print(controller_pokemon.CollectInfos().collect_speed(poke_test))
 
+"""
 """
 #Esse foi o primeiro SUCESSO dos testes de CHEGAR no effects das habilidades.
 dic = {}
@@ -119,11 +116,11 @@ print(controller_pokemon.PokemonAPI().get_abilities(pokemon))
 
 Alguimas coisas estão fora de contexto mas é só para armazenar as tentantivas e ter uma parâmetro de evolução.             
 
-Oq eu estava retornando a def show_abilities() 
-#return f"Abilities: {[a['ability']['name'] for a in show_abilities['abilities']]}"#Listcomprehensions
+Oq eu estava retornando a def collect_abilities() 
+#return f"Abilities: {[a['ability']['name'] for a in collect_abilities['abilities']]}"#Listcomprehensions
 
 """
-
+####################################################################################
 """
 Testes rápidos de batalhas, foi mais para enteder o index de cada coisa. 
 def info_battle(battle):
@@ -136,39 +133,39 @@ info_battle(pokemon)
 print(controller_pokemon.PokemonAPI().infos_battle(pokemon))
 """
 
-#######################
-"""
-Aqui começa os testes dos pokemons e do treinador.
-folder:Model -> file:service
-"""
+#######################################################
+##Aqui começa os testes dos pokemons e do treinador.###
+##folder:Model -> file:service                      ###
+#######################################################
+
 #local_test.add_pokedex()
 #pokedex.append(local_test)
 #local_test = 'pikachu'
 #new_pokemon = services.Pokemon('pikachu')
 #new_pokemon_one = services.Pokemon('squirtle')
-
-
-"""
-new_pokemon = Pokemon('pikachu')
-new_pokemon = Pokemon('pikachu')
-new_pokemon = Pokemon('pikachu')
-"""
+#####################################
+##Testes de instânica class Pokemon##
+#####################################
+print(services.Pokemon(poke_test))
 
 #new_pokemon.add_pokedex(new_pokemon)
 #new_pokemon_one.add_pokedex(new_pokemon_one)
 
-#print(services.Pokemon().show_my_pokemons())
+#print(services.Pokemon().collect_my_pokemons())
 
 # print(services.pokedex)
 
+#######################################################
+##            Testes Classs Trainer                  ##
+##                 Intancia 1.                       ##
+##   Criação de intancias e população de inventário  ##
+#######################################################
 
-#Testes Classs Trainer
-#Intancia 1.
-#Criação de intancias e população de inventário
+"""
 treinador_1 = services.Trainer("Gabriel", "ash")
 poke_1 = 'Lucario'
 poke_2 = 'Squirtle'
-poke_3 = 'Pidgey'
+poke_3 = 'Palkia'
 treinador_1.add_pokemons(poke_1)
 treinador_1.add_pokemons(poke_2)
 treinador_1.add_pokemons(poke_3)
@@ -187,7 +184,7 @@ print(treinador_1)
 print("########################################")
 ####################################
 #Instancia 2.
-treinador_2 = services.Trainer("Samuel", "Samuca")
+treinador_2 = services.Trainer("Samuel", "Brock")
 poke_4 = 'Charmander'
 poke_5 = 'Growlithe'
 poke_6 = 'Mew'
@@ -198,3 +195,19 @@ treinador_2.add_pokeballs('pokeball', 3)
 treinador_2.add_pokeballs('masterball', 3)
 treinador_2.add_trainer(treinador_2)
 print(treinador_2)
+####################################
+print("########################################")
+####################################
+#Instancia 3.
+treinador_3 = services.Trainer("Kaique", "Gary")
+poke_7 = 'Snorlax'
+poke_8 = 'Charizard'
+poke_9 = 'Cindaquil'
+treinador_3.add_pokemons(poke_7)
+treinador_3.add_pokemons(poke_8)
+treinador_3.add_pokemons(poke_9)
+treinador_3.add_pokeballs('pokeball', 100)
+treinador_3.add_pokeballs('masterball', 0)
+treinador_3.add_trainer(treinador_3)
+print(treinador_3)
+"""

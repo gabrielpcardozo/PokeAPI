@@ -23,19 +23,19 @@ class Pokemon:
 
     def __init__(self, pokemon_name):
         #about pokemon api
-        self.name = controller_pokemon.ShowInfos().show_name(pokemon_name)
-        self.id = controller_pokemon.ShowInfos().show_id(pokemon_name)
+        self.name = controller_pokemon.CollectInfos().collect_name(pokemon_name)
+        self.id = controller_pokemon.CollectInfos().collect_id(pokemon_name)
         #Cacracters
-        self.type = controller_pokemon.ShowInfos().show_type(pokemon_name)
-        self.weight =  controller_pokemon.ShowInfos().show_weight(pokemon_name)
+        self.type = controller_pokemon.CollectInfos().collect_type(pokemon_name)
+        self.weight =  controller_pokemon.CollectInfos().collect_weight(pokemon_name)
         #Combat
-        self.hp = controller_pokemon.ShowInfos().show_HP(pokemon_name)
-        self.abilities = controller_pokemon.ShowInfos().show_abilities(pokemon_name)
-        self.attack = controller_pokemon.ShowInfos().show_attack(pokemon_name)
-        self.defense = controller_pokemon.ShowInfos().show_defense(pokemon_name)
-        self.super_attack = controller_pokemon.ShowInfos().show_special_attack(pokemon_name)
-        self.super_defense = controller_pokemon.ShowInfos().show_special_defense(pokemon_name)
-        self.speed = controller_pokemon.ShowInfos().show_speed(pokemon_name)
+        self.hp = controller_pokemon.CollectInfos().collect_HP(pokemon_name)
+        self.abilities = controller_pokemon.CollectInfos().collect_abilities(pokemon_name)
+        self.attack = controller_pokemon.CollectInfos().collect_attack(pokemon_name)
+        self.defense = controller_pokemon.CollectInfos().collect_defense(pokemon_name)
+        self.super_attack = controller_pokemon.CollectInfos().collect_special_attack(pokemon_name)
+        self.super_defense = controller_pokemon.CollectInfos().collect_special_defense(pokemon_name)
+        self.speed = controller_pokemon.CollectInfos().collect_speed(pokemon_name)
     
     def add_pokedex(self, pokemon_name):
         pokedex.append(pokemon_name)
