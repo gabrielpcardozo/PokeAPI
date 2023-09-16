@@ -37,9 +37,14 @@ class Pokemon:
         self.super_defense = controller_pokemon.CollectInfos().collect_special_defense(pokemon_name)
         self.speed = controller_pokemon.CollectInfos().collect_speed(pokemon_name)
     
+    def __str__(self):
+        return f"{self.name}"
+
     def add_pokedex(self, pokemon_name):
         pokedex.append(pokemon_name)
-
+    
+    def show_id(self):
+        return self.id
     
     def show_my_pokemons():
         for p in pokedex:
@@ -72,7 +77,7 @@ class Trainer:
         self.nickname = nickname
         self.bag = {
             'pokeballs':{'Pokeballs':0, 'Masterballs':0},
-            'Pokedex':[]
+            'Pokedex':pokedex
             },
         self.insignia = []
         Trainer.xp = self.xp
@@ -83,7 +88,10 @@ class Trainer:
 
 
     def __str__(self):
-        return f"Nome do treinador: {self.name}, seu apelido é: {self.nickname},\n Pokeballs: {self.bag[0]['pokeballs']},\n Seus pokemons são os {self.bag[0]['Pokedex']}"
+        return f"Nome do treinador: {self.name}, seu apelido é: {self.nickname},\n Pokeballs: {self.bag[0]['pokeballs']}, \n Seus pokemons são os {str(self.bag[0]['Pokedex'])}"
+
+    def name_instance(self):
+        return self.name
 
     def add_pokeballs(self, pokeball, amount):
        if pokeball == 'pokeball':
@@ -100,11 +108,10 @@ class Trainer:
         pass
 
     def add_pokemons(self,name_pokemon):
-        self.bag[0]['Pokedex'].append(name_pokemon)
-
+        self.bag[0]['Pokedex'].append(str(name_pokemon))
 
     def show_my_pokemons(self):
-        return self.bag[0]['Pokedex']
-
+        return f"Esses são os seus Pokemons: {str(self.bag[0]['Pokedex'])}"
+        
     def inventory():
         pass

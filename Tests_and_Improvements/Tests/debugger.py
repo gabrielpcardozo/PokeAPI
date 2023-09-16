@@ -146,7 +146,29 @@ print(controller_pokemon.PokemonAPI().infos_battle(pokemon))
 #####################################
 ##Testes de instânica class Pokemon##
 #####################################
-print(services.Pokemon(poke_test))
+
+first_pokemon = services.Pokemon(poke_test)
+second_pokemon = services.Pokemon('lucario')
+third_pokemon = services.Pokemon('palkia')
+fourth_pokemon = services.Pokemon('totodile')
+print(f"Aqui estamos utilizando o método __str__(): {first_pokemon.__str__()}")
+print("############")
+print(f"Aqui estamos utilizando o método __repr(): {first_pokemon.__repr__()}")
+print("############")
+
+#print(str(first_pokemon))
+#print(services.Pokemon().name(first_pokemon))
+first_trainer = services.Trainer('Gabriel', 'perigoso')
+first_trainer.add_pokemons(first_pokemon)
+first_trainer.add_pokemons(second_pokemon)
+first_trainer.add_pokemons(third_pokemon)
+first_trainer.add_pokemons(fourth_pokemon)
+print(first_trainer)
+print("############")
+print(first_trainer.show_my_pokemons())
+print("############")
+#print(first_trainer.bag['Pokedex'].name)
+#print(first_trainer.show_my_pokemons())
 
 #new_pokemon.add_pokedex(new_pokemon)
 #new_pokemon_one.add_pokedex(new_pokemon_one)
@@ -164,7 +186,7 @@ print(services.Pokemon(poke_test))
 """
 treinador_1 = services.Trainer("Gabriel", "ash")
 poke_1 = 'Lucario'
-poke_2 = 'Squirtle'
+poke_2 = 'totodile'
 poke_3 = 'Palkia'
 treinador_1.add_pokemons(poke_1)
 treinador_1.add_pokemons(poke_2)
