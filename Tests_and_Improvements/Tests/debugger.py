@@ -9,6 +9,11 @@ import requests
 poke_test = 'snorlax'
 #pprint -> Para retornos mais formatados.
 pp = pprint.PrettyPrinter()
+"""
+Eu só consegui usar o 
+pprint.print(conteudo)
+de outra forma não conheço.
+"""
 ######################
 #Importação de MODULOS. 
 
@@ -147,7 +152,7 @@ print(controller_pokemon.PokemonAPI().infos_battle(pokemon))
 ##Testes de instânica class Pokemon##
 #####################################
 
-first_pokemon = services.Pokemon(poke_test)
+"""first_pokemon = services.Pokemon(poke_test)
 second_pokemon = services.Pokemon('lucario')
 third_pokemon = services.Pokemon('palkia')
 fourth_pokemon = services.Pokemon('totodile')
@@ -166,7 +171,7 @@ first_trainer.add_pokemons(fourth_pokemon)
 print(first_trainer)
 print("############")
 print(first_trainer.show_my_pokemons())
-print("############")
+print("############")"""
 #print(first_trainer.bag['Pokedex'].name)
 #print(first_trainer.show_my_pokemons())
 
@@ -232,4 +237,37 @@ treinador_3.add_pokeballs('pokeball', 100)
 treinador_3.add_pokeballs('masterball', 0)
 treinador_3.add_trainer(treinador_3)
 print(treinador_3)
+"""
+
+#######################################################
+##            Testes Classs Pokemon                  ##
+##                                                   ##
+##   Criação de Pokemons e testes em suas chamadas   ##
+#######################################################
+"""
+#Criar um pokemon
+pokemon1 = services.Pokemon(poke_test)
+print(pokemon1)
+print(type(pokemon1))
+print("##################")
+print(pokemon1.show_id())
+print(pokemon1.infos_battle())
+"""
+################################################################
+
+#######################################################
+##            Testes Classs Pokemon                  ##
+##                                                   ##
+##          Refatorteção da classe Pokemon           ##
+#######################################################
+
+test = services.Pokemon(poke_test)
+print(test)
+
+
+"""search_pokemon = poke_test
+url = f'https://pokeapi.co/api/v2/pokemon/{search_pokemon}'
+poke = requests.get(url).json()
+
+pp.pprint(poke['stats'])
 """

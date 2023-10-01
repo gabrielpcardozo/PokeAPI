@@ -6,10 +6,12 @@ A ideia desse meu arquivo é criar os meus serviços onde vamos apresentar
     Pokemons
     inventário
 """
+import time
+start_time = time.time()
 import sys
 sys.path.insert(0, '/home/gcardozo/Projects/Python/PokeAPI/App/Controllers')
 import controller_pokemon
-
+import requests
 
 treinadores = []
 pokedex = []
@@ -17,39 +19,60 @@ pokedex = []
 #Realizar diversas chamadas ao site do pokeAPI não está dando certo sendo retornado pelo controller.PokeAPI()get_mmain_pokemon() error 404 diversas vezes. sendo possível um limite de somente uma instância.
 #Vou repaginar a classe para realizarmos menos chamadas. Vou manter essa classe salva na pasta de Tests.
 
+
+"""name_api = None
+
+if url == 200:
+    okemon_data = requests.get(url).json()
+print("pNot found.")
+"""
 class Pokemon: 
 
     xp = 0
+    level = 0
+    infos = {}
 
-    def __init__(self, pokemon_name):
-        #about pokemon api
-        self.name = controller_pokemon.CollectInfos().collect_name(pokemon_name)
-        self.id = controller_pokemon.CollectInfos().collect_id(pokemon_name)
-        #Cacracters
-        self.type = controller_pokemon.CollectInfos().collect_type(pokemon_name)
-        self.weight =  controller_pokemon.CollectInfos().collect_weight(pokemon_name)
+    def __init__(self,search_pokemon):
+        url = f'https://pokeapi.co/api/v2/pokemon/{search_pokemon}'
+        poke = requests.get(url).json()
+        
+        #Main infos
+        self.__name = poke['name']
+        self.__id = poke['id']
+        self.__type = [t['type']['name'] for t in poke['types']]
+        #Stats
+        self.__hp = poke['stats'][0]['base_stat']
+        self.__attack = poke['stats'][1]['base_stat']
+        self.__defense = poke['stats'][2]['base_stat']
+        self.__especialatt = poke['stats'][3]['base_stat']
+        self.__especialdef = poke['stats'][4]['base_stat']
+        self.__speed = poke['stats'][5]['base_stat']
         #Combat
-        self.hp = controller_pokemon.CollectInfos().collect_HP(pokemon_name)
-        self.abilities = controller_pokemon.CollectInfos().collect_abilities(pokemon_name)
-        self.attack = controller_pokemon.CollectInfos().collect_attack(pokemon_name)
-        self.defense = controller_pokemon.CollectInfos().collect_defense(pokemon_name)
-        self.super_attack = controller_pokemon.CollectInfos().collect_special_attack(pokemon_name)
-        self.super_defense = controller_pokemon.CollectInfos().collect_special_defense(pokemon_name)
-        self.speed = controller_pokemon.CollectInfos().collect_speed(pokemon_name)
-    
-    def __str__(self):
-        return f"{self.name}"
+        self.__abilities = [a['ability']['name'] for a in poke["abilities"]]
 
-    def add_pokedex(self, pokemon_name):
-        pokedex.append(pokemon_name)
+    def __str__(self):
+        infos = {
+                "Main infos":{
+                    "Name":self.__name,
+                    "ID":self.__id,
+                    "Type":self.__type,
+                },
+                "Stats":{
+                    "HP":self.__hp,
+                    "Attack":self.__attack,
+                    "Defense":self.__defense,
+                    "Special-Attack":self.__especialatt,
+                    "Special-Defense":self.__especialdef,
+                    "Speed":self.__speed
+                },
+                "Abilities":{
+                    'Abilities':self.__abilities
+                }
+                 }
+        return str(infos)
     
     def show_id(self):
         return self.id
-    
-    def show_my_pokemons():
-        for p in pokedex:
-            print(p)
-
 
     def evolution():
         """
@@ -59,13 +82,12 @@ class Pokemon:
         pass
 
 
-    def infos():
-        """
-        Aqui vai ser a função de informações da pokedex, onde vamos printar
-        todas as evoluções dos pokemons.
-        """
-        pass
-
+    def infos_battle(self):
+        infos = [
+        controller_pokemon.CollectInfos().collect_attack(self.name),
+        controller_pokemon.CollectInfos().collect_defense(self.name)
+        ]
+        return infos
 
 
 class Trainer:
@@ -115,3 +137,13 @@ class Trainer:
         
     def inventory():
         pass
+
+
+test = Pokemon('pikachu')
+print(test)
+
+end_time = time.time()
+execution_time = end_time - start_time
+# Mostrar o tempo em minutos
+tempo_em_minutos = execution_time
+print(f"Tempo de execução: {tempo_em_minutos:.2f} segundos")

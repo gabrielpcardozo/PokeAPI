@@ -158,17 +158,3 @@ class CollectInfos:
         collect_picture = PokemonAPI().get_main_pokemon(picture)
         return collect_picture['sprites']['front_default']
 
-
-list_pokedex = []
-
-class Pokemon:
-    def __init__(self, pokemon_name):
-        self.name = collectInfos().collect_name(pokemon_name)
-
-    def add_poke(poke):
-        new_instance = Pokemon(poke)
-        list_pokedex.append(new_instance)
-
-
-#print(PokemonAPI().get_main_pokemon('pikachu'))
-#print(collectInfos().collect_name('pikachu'))

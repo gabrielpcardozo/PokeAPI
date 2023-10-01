@@ -1,0 +1,94 @@
+                                            TESTES de performance na classe Pokemon do MOdels -> services.py 
+
+"""
+        				Classe ANTIGA 
+        
+        #about pokemon api
+        self.name = controller_pokemon.CollectInfos().collect_name(pokemon_name)
+        self.id = controller_pokemon.CollectInfos().collect_id(pokemon_name)
+        self.attack = controller_pokemon.CollectInfos().collect_attack(pokemon_name)
+        self.defense = controller_pokemon.CollectInfos().collect_defense(pokemon_name)
+        #Cacracters
+        self.type = controller_pokemon.CollectInfos().collect_type(pokemon_name)
+        self.weight =  controller_pokemon.CollectInfos().collect_weight(pokemon_name)
+        #Combat
+        self.hp = controller_pokemon.CollectInfos().collect_HP(pokemon_name)
+        self.abilities = controller_pokemon.CollectInfos().collect_abilities(pokemon_name)
+        self.super_attack = controller_pokemon.CollectInfos().collect_special_attack(pokemon_name)
+        self.super_defense = controller_pokemon.CollectInfos().collect_special_defense(pokemon_name)
+        self.speed = controller_pokemon.CollectInfos().collect_speed(pokemon_name)
+
+					__str__ ANTIGO
+    return(f"{self.name}, {self.id}, {self.attack}, {self.defense},{self.type},{self.weight}, {self.hp}, {self.abilities}, {self.super_attack}, {self.super_defense}, {self.speed}
+    
+""" 
+===========================================================================================================
+Performances do código antigo. 
+	Teste 1 ->
+		pikachu, 25,  Attack:55,  Defense:40,Type(s): ['electric'],60,  HP:35, Habilidade: static -> Effect: Has a 30% chance of paralyzing attacking Pokémon on contact.
+Habilidade: lightning-rod -> Effect: Redirects single-target electric moves to this Pokémon where possible.  Absorbs Electric moves, raising Special Attack one stage.,  Special Attack:50,  Special Defense:50,  Speed:90
+				Tempo de execução: 4.99 segundos
+	Teste 2 -> 
+		pikachu, 25,  Attack:55,  Defense:40,Type(s): ['electric'],60,  HP:35, Habilidade: static -> Effect: Has a 30% chance of paralyzing attacking Pokémon on contact.
+Habilidade: lightning-rod -> Effect: Redirects single-target electric moves to this Pokémon where possible.  Absorbs Electric moves, raising Special Attack one stage.,  Special Attack:50,  Special Defense:50,  Speed:90
+				Tempo de execução: 5.02 segundos
+	Teste -> 3
+		pikachu, 25,  Attack:55,  Defense:40,Type(s): ['electric'],60,  HP:35, Habilidade: static -> Effect: Has a 30% chance of paralyzing attacking Pokémon on contact.
+Habilidade: lightning-rod -> Effect: Redirects single-target electric moves to this Pokémon where possible.  Absorbs Electric moves, raising Special Attack one stage.,  Special Attack:50,  Special Defense:50,  Speed:90
+				Tempo de execução: 5.41 segundos
+===========================================================================================================
+"""
+					classe NOVA
+					
+	url = f'https://pokeapi.co/api/v2/pokemon/{search_pokemon}'
+        poke = requests.get(url).json()
+        
+        #Main infos
+        self.__name = poke['name']
+        self.__id = poke['id']
+        self.__type = [t['type']['name'] for t in poke['types']]
+        #Stats
+        self.__hp = poke['stats'][0]['base_stat']
+        self.__attack = poke['stats'][1]['base_stat']
+        self.__defense = poke['stats'][2]['base_stat']
+        self.__especialatt = poke['stats'][3]['base_stat']
+        self.__especialdef = poke['stats'][4]['base_stat']
+        self.__speed = poke['stats'][5]['base_stat']
+        #Combat
+        self.__abilities = [a['ability']['name'] for a in poke["abilities"]]
+					
+					__str__ NOVO
+	
+	infos = {
+                "Main infos":{
+                    "Name":self.__name,
+                    "ID":self.__id,
+                    "Type":self.__type,
+                },
+                "Stats":{
+                    "HP":self.__hp,
+                    "Attack":self.__attack,
+                    "Defense":self.__defense,
+                    "Special-Attack":self.__especialatt,
+                    "Special-Defense":self.__especialdef,
+                    "Speed":self.__speed
+                },
+                "Abilities":{
+                    'Abilities':self.__abilities
+                }
+                 }
+        return str(infos)						
+"""
+===========================================================================================================
+    Performance do código novo. 
+    	Teste 1 -> 
+    		{'Main infos': {'Name': 'pikachu', 'ID': 25, 'Type': ['electric']}, 'Stats': {'HP': 35, 'Attack': 55, 'Defense': 40, 'Special-Attack': 50, 'Special-Defense': 50, 'Speed': 90}, 'Abilities': {'Abilities': ['static', 'lightning-rod']}}
+				Tempo de execução: 0.82 segundos
+	Teste 2 ->
+		{'Main infos': {'Name': 'pikachu', 'ID': 25, 'Type': ['electric']}, 'Stats': {'HP': 35, 'Attack': 55, 'Defense': 40, 'Special-Attack': 50, 'Special-Defense': 50, 'Speed': 90}, 'Abilities': {'Abilities': ['static', 'lightning-rod']}}
+				Tempo de execução: 0.23 segundos
+	Teste 3-> 
+		{'Main infos': {'Name': 'pikachu', 'ID': 25, 'Type': ['electric']}, 'Stats': {'HP': 35, 'Attack': 55, 'Defense': 40, 'Special-Attack': 50, 'Special-Defense': 50, 'Speed': 90}, 'Abilities': {'Abilities': ['static', 'lightning-rod']}}
+				Tempo de execução: 0.40 segundos
+===========================================================================================================			
+		
