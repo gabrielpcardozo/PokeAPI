@@ -1,17 +1,16 @@
-#Quero ignorar todas as configurações padrões do VENV menos os requisitos.
-venv/*
-
-!venvs/venv/requirements.txt
-!venvs/venv/pyvenv.cfg
-
-#Diretório de testes e novidades.
-PokeAPI/Tests_and_Improvements
-#Testes para nível de compreensão do que eu estou fazendo caso alguém queira comentar e me dar algum feedback.
-!PokeAPI/Tests_and_Improvements/Tests/debugger.py
-
-#é um diretório antigo que não vejo sentido estar no Github
-PokeAPI/Pokemon.old
-#Não preciso disso poluindo o repositório.
+# Ambiente virtual
+venv/
 __pycache__/
-App/Models/__pycache__/
-App/Controllers/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos temporários
+*.sqlite3
+*.log
+*.env
+
+# Config do editor
+.vscode/
+.idea/
+
