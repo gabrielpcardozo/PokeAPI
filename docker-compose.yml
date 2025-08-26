@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  djangoapp:
+    container_name: pokeapi_django
+    build:
+      context: .
+    ports:
+      - 8000:8000
+    volumes:
+      - ./pokeapi_django:/pokeapi_django
+      - ./data/web/static:/data/web/static/
+      - ./data/web/media:/data/web/media/
+    env_file:
+      - ./dotenv_files/.env
+    depends_on:
+      - psql
+  psql:
+    container_name: psql
+    image: postgres:13-alpine
+    volumes:
+      - ./data/postgres/data:/var/lib/postgresql/data/
+    env_file:
+      - ./dotenv_files/.env
+  plantuml:
+    container_name: plantuml
+    image: plantuml/plantuml-server
+    ports:
+      - "8080:8080"
