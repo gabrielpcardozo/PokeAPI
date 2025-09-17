@@ -1,3 +1,4 @@
-@startuml Hello World
-A --> B : Hello
+@startuml teste
+title PokeAPI - Django
+[A] --> [B]
 @enduml
