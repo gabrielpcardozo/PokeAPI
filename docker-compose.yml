@@ -1,12 +1,13 @@
 services:
   djangoapp:
-    container_name: pokeapi_django
+    container_name: PokeAPI_Django
+    image: pokeapi-django:latest
     build:
       context: .
     ports:
       - 8000:8000
     volumes:
-      - ./pokeapi_django:/pokeapi_django
+      - ./PokeAPI_Django:/PokeAPI_Django
       - ./data/web/static:/data/web/static/
       - ./data/web/media:/data/web/media/
       - ./Doc:/Doc
