@@ -5,14 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        .pokemons {
+            text-align: center;
+        }
+
+        .pagination-left {
+            text-align: left;
+        }
+
+        .pagination-center {
+            text-align: center;
+        }
+
+        .pagination-right {
+            text-align: right;
+        }
+    </style>
+
 </head>
 
 <body>
     <h1>All Pokemons</h1>
     <p>Here you can see all the pokemons</p>
-    <h3>Name: {{ name }}</h3>
-    <h3>Pokedex id: {{ id }}</h3>
-    <h3>Types: {{ type|join:", " }}</h3>
+    <div class="pokemons">
+        {% for p in page_obj %}
+        <h2>Name : {{p}} </h2>
+        {% endfor %}
+    </div>
+
+    <!-- Controles de paginação -->
+    <div class="pagination-left">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">⬅️ Previous</a>
+        {% endif %}
+    </div>
+
+    <div class="pagination-center">
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    </div>
+
+    <div class="pagination-right">
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next ➡️</a>
+        {% endif %}
+    </div>
 </body>
 
 </html>
