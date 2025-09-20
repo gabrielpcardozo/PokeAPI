@@ -1,0 +1,16 @@
+@startuml Inventory
+
+class Inventory {
+  +items : List<Item>
+}
+
+class Item {
+  +id : Integer
+  +name : String
+  +quantity : Integer
+}
+
+Trainer "1" -- "1" Inventory : possui >
+Inventory "1" *-- "*" Item : contém >
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml User
+
+class User { 
+  +ID : Integer
+  +firstName : String
+  +secondName : String
+}
+
+class SystemUser {
+  +email : String
+  +age : Integer
+  +password : String
+}
+
+class Trainer {
+  +nickname : String
+  +inventory : Inventory   ' placeholder, futura associação
+  +teamPokemon : TeamPokemon ' placeholder, futura associação
+}
+
+User <|-- SystemUser
+User <|-- Trainer
+
+@enduml

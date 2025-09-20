@@ -1,0 +1,27 @@
+@startuml Classes
+
+class Pokemon {
+  +id : Integer
+  +name : String
+  +pokedexId : Integer
+  +height : Integer
+  +weight : Integer
+  +types : List<String>
+  +sprites : List<String>
+
+  -- Stats --
+  +hp : Integer
+  +attack : Integer
+  +defense : Integer
+  +specialAttack : Integer
+  +specialDefense : Integer
+  +speed : Integer
+
+  -- Combat Phase --
+  +moves : List<String>
+
+  -- Additional Info --
+  +location : List<String>
+  +gameIndices : List<String>
+}
+@enduml

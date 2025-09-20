@@ -1,0 +1,12 @@
+@startuml TeamPokemon
+
+class TeamPokemon {
+  +pokemons : List<Pokemon>
+  +addPokemon(p : Pokemon)
+  +removePokemon(p : Pokemon)
+}
+
+Trainer "1" -- "1" TeamPokemon : possui >
+TeamPokemon "1" *-- "*" Pokemon : contém >
+
+@enduml

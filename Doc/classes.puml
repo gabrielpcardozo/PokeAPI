@@ -1,0 +1,71 @@
+@startuml Classes
+
+class Pokemon {
+  +id : Integer
+  +name : String
+  +pokedexId : Integer
+  +height : Integer
+  +weight : Integer
+  +types : List<String>
+  +sprites : List<String>
+
+  -- Stats --
+  +hp : Integer
+  +attack : Integer
+  +defense : Integer
+  +specialAttack : Integer
+  +specialDefense : Integer
+  +speed : Integer
+
+  -- Combat Phase --
+  +moves : List<String>
+
+  -- Additional Info --
+  +location : List<String>
+  +gameIndices : List<String>
+}
+
+class User { 
+  +ID : Integer
+  +firstName : String
+  +secondName : String
+}
+
+class SystemUser {
+  +email : String
+  +age : Integer
+  +password : String
+}
+
+class Trainer {
+  +nickname : String
+}
+
+User <|-- SystemUser
+User <|-- Trainer
+
+
+class Inventory {
+  +items : List<Item>
+}
+
+class Item {
+  +id : Integer
+  +name : String
+  +quantity : Integer
+}
+
+Trainer "1" -- "1" Inventory : possui >
+Inventory "1" *-- "*" Item : contém >
+
+
+class TeamPokemon {
+  +pokemons : List<Pokemon>
+  +addPokemon(p : Pokemon)
+  +removePokemon(p : Pokemon)
+}
+
+Trainer "1" -- "1" TeamPokemon : possui >
+TeamPokemon "1" *-- "*" Pokemon : contém >
+
+@enduml
