@@ -27,3 +27,16 @@ services:
     image: plantuml/plantuml-server
     ports:
       - "8080:8080"
+  pytest:
+    container_name: pokeapi_pytest
+    build:
+      context: .
+    command: pytest --reuse-db -v
+    volumes:
+      - ./pokeapi_django:/pokeapi_django
+      - ./data/web/static:/data/web/static/
+      - ./data/web/media:/data/web/media/
+    env_file:
+      - ./dotenv_files/.env
+    depends_on:
+      - psql
