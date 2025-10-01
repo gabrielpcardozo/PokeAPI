@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeAPI - Favorite Pokemon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        .pokemon-card {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 40px auto;
+            padding: 20px;
+            max-width: 900px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .pokemon-image img {
+            width: 500px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .pokemon-info {
+            display: flex;
+            flex-direction: column;
+            margin-left: 40px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .info-block {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f9f9f9;
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-block h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .info-block h3 {
+            margin: 5px 0;
+            font-weight: normal;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Welcome to the PokeAPI</h2>
+    <p>This is the home page of the PokeAPI</p>
+
+    <div class="pokemon-card">
+
+        <div class="pokemon-image">
+            <img src="{{ Image }}" alt="{{name}}">
+        </div>
+
+        <div class="pokemon-info">
+            <div class="info-block basics-infos">
+                <h2>Infos</h2>
+                <h3>Name: {{ name }}</h3>
+                <h3>Pokedex id: {{ id }}</h3>
+                <h3>Types: {{ type|join:", " }}</h3>
+            </div>
+
+            <div class="info-block combat-infos">
+                <h2>Combat</h2>
+                <h3>HP: {{ HP }}</h3>
+                <h3>Attack: {{ Attack }}</h3>
+                <h3>Defense: {{ Defense }}</h3>
+                <h3>Speed: {{ Speed }}</h3>
+            </div>
+            <div class="info-block moves-infos">
+                <h2>Moves</h2>
+                <h3>Abilities: {{ Abilities|join:", " }}</h3>
+                <h3>EspecialAttack: {{ EspecialAttack }}</h3>
+                <h3>EspecialDefense: {{ EspecialDefense }}</h3>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

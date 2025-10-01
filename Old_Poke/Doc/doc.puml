@@ -1,0 +1,8 @@
+@startuml pokeapi
+title PokeAPI - Django
+
+package "API" {
+  [Coletar todos os pokemons]
+}
+
+@enduml

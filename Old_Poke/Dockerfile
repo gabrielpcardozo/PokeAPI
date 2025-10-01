@@ -1,4 +1,5 @@
 FROM python:3.11.3-alpine3.18
+#LABEL mantainer="luizomf@gmail.com"
 
 # Instala dependências necessárias
 RUN apk add --no-cache \
@@ -28,7 +29,6 @@ WORKDIR /PokeAPI_Django
 # A porta 8000 estará disponível para conexões externas ao container
 # É a porta que vamos usar para o Django.
 EXPOSE 8000
-EXPOSE 8080
 
 # RUN executa comandos em um shell dentro do container para construir a imagem. 
 # O resultado da execução do comando é armazenado no sistema de arquivos da 
@@ -48,7 +48,6 @@ RUN  chmod -R 755 /data/web/static
 RUN  chmod -R 755 /data/web/media 
 RUN chown -R duser:duser /data/web
 RUN chmod -R +x /scripts
-RUN apk add --no-cache curl
 
 # Adiciona a pasta scripts e venv/bin 
 # no $PATH do container.

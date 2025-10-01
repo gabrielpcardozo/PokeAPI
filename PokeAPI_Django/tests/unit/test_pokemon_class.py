@@ -8,3 +8,4 @@ class PokemonModelTest():
 
 test = Pokemon("Lucario", "119", "Lutador")
 print(test)
+
