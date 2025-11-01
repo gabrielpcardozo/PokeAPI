@@ -6,6 +6,6 @@ class Pokemon:
     id:int
     type:str
 
-test = Pokemon("Lucario", "119", "Lutador")
+test = Pokemon("Lucario", 119, "Lutador")
 print(type(test))
 print(test)
